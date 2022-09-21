@@ -3,7 +3,7 @@ Service Discovery
 - Client 가 서비스를 호출할때 서비스의 위치 (IP, port) 를 알아낼 수 있는 기능을 제공하는 서비스
 - 일종의 전화번호 부
 
-![](2022-09-21-18-11-05.png)
+![](images/2022-09-21-18-11-05.png)
 
 
 ## ServiceDiscovery 프로젝트 구성
@@ -34,10 +34,23 @@ eureka:
     fetch-registry: false
 ```
 
-## 사용자 서비스를 세팅
+## 사용자 서비스 프로젝트 구성
+```java
+@EnableDiscoveryClient // <-
+@SpringBootApplication
+public class UserApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(UserApplication.class, args);
+	}
+
+}
+
+```
+
 ```yaml
 server:
-  port: 0
+  port: 0 ## <- 램덤 포트로 생성
 
 spring:
   application:
@@ -51,5 +64,8 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaultZone: http://127.0.0.1:8761/eureka ## <- 서비스 디스커버리에 등록
 ```
+
+## eureka 화면
+![](images/2022-09-21-18-18-53.png)
