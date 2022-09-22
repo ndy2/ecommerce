@@ -40,3 +40,7 @@ spring:
             - AddResponseHeader=second-resp, second-resp-val
             - CustomFilter
             - name : LoggingFilter
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**

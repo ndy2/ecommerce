@@ -16,7 +16,7 @@ class UserEntity(
     var createdDate: LocalDate = LocalDate.now()
     var encryptedPwd: String? = null
 
-    fun encryptPwd(){
-        this.encryptedPwd = "{encrypt}$pwd"
+    fun encryptPwd(encoder: (CharSequence) -> String) {
+        this.encryptedPwd = encoder(pwd)
     }
 }
