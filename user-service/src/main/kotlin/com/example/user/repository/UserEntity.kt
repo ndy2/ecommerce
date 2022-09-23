@@ -1,4 +1,4 @@
-package com.example.user.service
+package com.example.user.repository
 
 import java.time.LocalDate
 import javax.persistence.Entity

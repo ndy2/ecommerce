@@ -1,5 +1,6 @@
 package com.example.user.service
 
+import com.example.user.repository.UserEntity
 import com.example.user.repository.UserRepository
 import com.example.user.service.dto.CreateUserRequest
 import com.example.user.service.dto.CreateUserResponse

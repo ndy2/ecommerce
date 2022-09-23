@@ -9,7 +9,6 @@ import com.example.user.service.dto.GetUsersResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.*
 
-@RequestMapping("/user-service")
 @RestController
 class UserController(
     private val userService: UserService,
