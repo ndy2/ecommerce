@@ -1,7 +1,6 @@
 package com.example.user.config.auth
 
 import com.example.user.repository.UserRepository
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
@@ -12,16 +11,18 @@ class SecurityUserService(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(email: String): UserDetails {
-        val userEntity = userRepository.findByEmail(email)
+        val userEntity = userRepository
+            .findByEmail(email) ?: throw IllegalArgumentException("no such user email : $email")
 
-        return User(
+        return SecurityUser(
+            userEntity.id!!,
             userEntity.email,
-            userEntity.encryptedPwd,
-            true,
-            true,
-            true,
-            true,
-            emptySet()
+            userEntity.encryptedPwd!!,
+            enabled = true,
+            accountNonExpired = true,
+            credentialsNonExpired = true,
+            accountNonLocked = true,
+            authorities = mutableSetOf()
         )
     }
 }

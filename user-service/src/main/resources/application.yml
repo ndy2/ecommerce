@@ -29,3 +29,8 @@ eureka:
 
 greeting:
   message: Welcome to the Simple E-Commerce
+
+jwt:
+  expiration: 86400000
+  issuer: haha
+  secret: user-token
