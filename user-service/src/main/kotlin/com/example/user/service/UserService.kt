@@ -48,7 +48,8 @@ class UserService(
 
     @Transactional(readOnly = true)
     fun getDetailedUserById(userId: String): GetDetailedUserResponse {
-        val user = userRepository.findById(userId).orElseThrow()
+        val user = userRepository.findByUserId(userId)
+            ?: throw IllegalArgumentException("no such user id : $userId")
 
         val orderUrl = String.format(env.getProperty("order-service.url")!!, userId)
         /*val orderListResponse: ResponseEntity<List<GetDetailedUserResponse.OrderResponse>> = restTemplate.exchange(
