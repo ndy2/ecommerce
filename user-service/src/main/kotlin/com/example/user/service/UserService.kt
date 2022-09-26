@@ -42,7 +42,7 @@ class UserService(
         return CreateUserResponse(
             savedUser.name,
             savedUser.email,
-            savedUser.id!!
+            savedUser.userId
         )
     }
 
@@ -63,7 +63,7 @@ class UserService(
         return GetDetailedUserResponse(
             user.name,
             user.email,
-            user.id!!,
+            user.userId,
             orderListResponse
         )
     }
@@ -74,7 +74,7 @@ class UserService(
             GetUsersResponse(
                 user.name,
                 user.email,
-                user.id!!
+                user.userId
             )
         }
     }

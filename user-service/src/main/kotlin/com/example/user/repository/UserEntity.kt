@@ -1,18 +1,19 @@
 package com.example.user.repository
 
 import java.time.LocalDate
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Entity
 @Table(name = "users")
 class UserEntity(
-    @Id var id: String? = null,
+    var userId: String,
     var name: String,
     var email: String,
     @Transient var pwd: String,
 ) {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
     var createdDate: LocalDate = LocalDate.now()
     var encryptedPwd: String? = null
 
