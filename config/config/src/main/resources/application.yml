@@ -1,0 +1,26 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: test
+    password: test
+
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          try-master-branch: false
+          uri: file:///Users/deukyun/Desktop/study-with-code/study-spring-cloud/ecommerce/git-local-repo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh

@@ -10,11 +10,11 @@ data class GetDetailedUserResponse(
 ) {
 
     data class OrderResponse(
+        val orderId: String,
         val productId: String,
         val quantity: Int,
         val unitPrice: Int,
         val totalPrice: Int,
         val createdDate: LocalDate,
-        val orderId: String
     )
 }

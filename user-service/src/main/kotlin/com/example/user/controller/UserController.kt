@@ -7,24 +7,21 @@ import com.example.user.service.dto.CreateUserResponse
 import com.example.user.service.dto.GetDetailedUserResponse
 import com.example.user.service.dto.GetUsersResponse
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.Environment
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class UserController(
     private val userService: UserService,
-    private val portNumber: PortNumberListner
+    private val portNumber: PortNumberListner,
+    private val env: Environment
 ) {
-    @Value("\${greeting.message}")
-    lateinit var greetingMessage: String;
 
     @GetMapping("/healthcheck")
     fun status(): String {
-        return "ok port : ${portNumber.port}"
-    }
-
-    @GetMapping("/welcome")
-    fun welcome(): String {
-        return greetingMessage
+        return "ok port : ${portNumber.port}" +
+                "jwt-expiraction : ${env.getProperty("jwt.expiration")}" +
+                "jwt secret: ${env.getProperty("jwt.secret")}"
     }
 
     @PostMapping("/users")
