@@ -15,7 +15,7 @@ class SecurityUserService(
             .findByEmail(email) ?: throw IllegalArgumentException("no such user email : $email")
 
         return SecurityUser(
-            userEntity.id!!,
+            userEntity.userId,
             userEntity.email,
             userEntity.encryptedPwd!!,
             enabled = true,

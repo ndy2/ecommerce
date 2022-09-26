@@ -42,13 +42,14 @@ class UserService(
         return CreateUserResponse(
             savedUser.name,
             savedUser.email,
-            savedUser.id!!
+            savedUser.userId
         )
     }
 
     @Transactional(readOnly = true)
     fun getDetailedUserById(userId: String): GetDetailedUserResponse {
-        val user = userRepository.findById(userId).orElseThrow()
+        val user = userRepository.findByUserId(userId)
+            ?: throw IllegalArgumentException("no such user id : $userId")
 
         val orderUrl = String.format(env.getProperty("order-service.url")!!, userId)
         /*val orderListResponse: ResponseEntity<List<GetDetailedUserResponse.OrderResponse>> = restTemplate.exchange(
@@ -63,7 +64,7 @@ class UserService(
         return GetDetailedUserResponse(
             user.name,
             user.email,
-            user.id!!,
+            user.userId,
             orderListResponse
         )
     }
@@ -74,7 +75,7 @@ class UserService(
             GetUsersResponse(
                 user.name,
                 user.email,
-                user.id!!
+                user.userId
             )
         }
     }
